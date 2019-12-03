@@ -14,18 +14,21 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 BulletSpeed;
     public int BulletsInClip;
     // public AudioClip GunshotSound;
+    public float fireRate;
 
     private PlatformerMotor2D _motor;
-    private float _direction = 1;
+    private float _direction = 1.0f;
     private float _prevDirection;
     private bool _restored = true;
     private bool _enableOneWayPlatforms;
     private bool _oneWayPlatformsAreWalls;
+    private float nextFire = 0.0f;
 
     // Use this for initialization
     void Start()
     {
         _motor = GetComponent<PlatformerMotor2D>();
+        nextFire = nextFire + fireRate;
     }
 
     // before enter en freedom state for ladders
@@ -138,7 +141,11 @@ public class PlayerController2D : MonoBehaviour
 
         if (Input.GetKeyDown(keyCodeToStart))
         {
-            Shoot();
+            if (Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            }
         }
     }
 
