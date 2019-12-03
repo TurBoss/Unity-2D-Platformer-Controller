@@ -2329,7 +2329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271251794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.8, y: -2.61, z: 0}
+  m_LocalPosition: {x: 7.8, y: -2.57, z: 0}
   m_LocalScale: {x: 2, y: 2.6000001, z: 1}
   m_Children: []
   m_Father: {fileID: 123106610}
@@ -2500,8 +2500,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1597622587}
   - component: {fileID: 1597622586}
-  - component: {fileID: 1597622585}
   - component: {fileID: 1597622588}
+  - component: {fileID: 1597622589}
+  - component: {fileID: 1597622585}
   m_Layer: 8
   m_Name: bullet
   m_TagString: Untagged
@@ -2509,8 +2510,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!61 &1597622585
-BoxCollider2D:
+--- !u!58 &1597622585
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2522,19 +2523,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000008940697, y: 0.000000033527613}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.005141712}
   serializedVersion: 2
-  m_Size: {x: 0.19533575, y: 0.1916478}
-  m_EdgeRadius: 0
+  m_Radius: 0.07468811
 --- !u!212 &1597622586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2617,8 +2608,20 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1597622589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597622584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a208fcd7154ebe4da5ae23a820a80cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821122050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,6 +2849,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6100000, guid: f53f0e5cd92ba5148aace93d59b06aaf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: f53f0e5cd92ba5148aace93d59b06aaf, type: 3}
       propertyPath: keyCodeToStart
       value: 331
@@ -2865,6 +2872,10 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: f53f0e5cd92ba5148aace93d59b06aaf, type: 3}
       propertyPath: shotDirection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: f53f0e5cd92ba5148aace93d59b06aaf, type: 3}
+      propertyPath: fireRate
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53f0e5cd92ba5148aace93d59b06aaf, type: 3}

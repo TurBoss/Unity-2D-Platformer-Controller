@@ -3,11 +3,6 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
-    public KeyCode keyCodeToStart;
-    public GameObject BulletPrefab;
-    public Vector2 BulletSpeed;
-    public int BulletsInClip;
-    public AudioClip GunshotSound;
 
     // Use this for initialization
     void Start()
@@ -23,18 +18,28 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(keyCodeToStart))
-        {
-            Shoot();
-        }
 
     }
 
-
-    void Shoot()
+    void OnCollisionEnter2D(Collision2D col)
     {
-        GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity) as GameObject;
-        bullet.GetComponent<Rigidbody2D>().AddForce(BulletSpeed * 10);
+        /* foreach (ContactPoint2D contact in col.contacts)
+        {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+        }
+        Debug.Log("Collision");
+        //all projectile colliding game objects should be tagged "Enemy" or whatever in inspector but that tag must be reflected in the below if conditional
+        if (col.gameObject.tag == "Enemy")
+        {
+
+        }
+        */
+        // Destroy(col.gameObject);
+        //add an explosion or something
+        //destroy the projectile that just caused the trigger collision
+        Destroy(gameObject, 0.1f);
+
+
     }
 
 }

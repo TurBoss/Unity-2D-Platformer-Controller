@@ -153,6 +153,8 @@ public class PlayerController2D : MonoBehaviour
     {
         GameObject bullet = Instantiate(BulletPrefab, transform.position + new Vector3(_direction, 0, 0), Quaternion.identity) as GameObject;
         bullet.GetComponent<Rigidbody2D>().AddForce(BulletSpeed * _direction);
+        Destroy(bullet, 5.0f);
     }
+
 
 }
