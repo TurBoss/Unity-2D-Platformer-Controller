@@ -6,7 +6,18 @@ using UnityEngine;
 [RequireComponent(typeof(PlatformerMotor2D))]
 public class PlayerController2D : MonoBehaviour
 {
+    // projectile stuff
+    public bool shootDirection;
+
+    public KeyCode keyCodeToStart;
+    public GameObject BulletPrefab;
+    public Vector2 BulletSpeed;
+    public int BulletsInClip;
+    // public AudioClip GunshotSound;
+
     private PlatformerMotor2D _motor;
+    private float _direction = 1;
+    private float _prevDirection;
     private bool _restored = true;
     private bool _enableOneWayPlatforms;
     private bool _oneWayPlatformsAreWalls;
@@ -71,6 +82,12 @@ public class PlayerController2D : MonoBehaviour
         if (Mathf.Abs(Input.GetAxis(PC2D.Input.HORIZONTAL)) > PC2D.Globals.INPUT_THRESHOLD)
         {
             _motor.normalizedXMovement = Input.GetAxis(PC2D.Input.HORIZONTAL);
+
+            if (_motor.normalizedXMovement != _prevDirection)
+            {
+                _direction = _motor.normalizedXMovement;
+                _prevDirection = _direction;
+            }
         }
         else
         {
@@ -118,5 +135,17 @@ public class PlayerController2D : MonoBehaviour
         {
             _motor.Dash();
         }
+
+        if (Input.GetKeyDown(keyCodeToStart))
+        {
+            Shoot();
+        }
     }
+
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(BulletPrefab, transform.position + new Vector3(_direction, 0, 0), Quaternion.identity) as GameObject;
+        bullet.GetComponent<Rigidbody2D>().AddForce(BulletSpeed * _direction);
+    }
+
 }
