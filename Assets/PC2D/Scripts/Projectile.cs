@@ -38,9 +38,6 @@ public class Projectile : MonoBehaviour
         //add an explosion or something
         //destroy the projectile that just caused the trigger collision
         Destroy(gameObject, 0.1f);
-
-
     }
 
 }
-

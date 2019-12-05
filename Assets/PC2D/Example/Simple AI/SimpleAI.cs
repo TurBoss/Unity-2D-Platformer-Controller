@@ -8,6 +8,7 @@ namespace  PC2D
         public float distanceCheckForJump;
         public float heightToFallFast;
         public float delayForWallJump;
+        public int hitNum;
 
         private PlatformerMotor2D _motor;
 
@@ -17,7 +18,7 @@ namespace  PC2D
         void Start()
         {
             _motor = GetComponent<PlatformerMotor2D>();
-            movement = -1;
+            movement = 1;
 
             // Find objects generally pretty bad but this is a demo :)
             SimpleAI[] ais = FindObjectsOfType<SimpleAI>();
@@ -33,6 +34,20 @@ namespace  PC2D
                     // Since the motor needs to be pressing into the wall to wall jump, we switch direction after the jump.
                     movement = Mathf.Sign(dir.x);
                 };
+        }
+
+
+        void OnCollisionEnter2D(Collision2D col)
+        {
+          hitNum -= 1;
+
+          if (hitNum <= 0)
+          {
+
+            movement = 0;
+            _motor.normalizedXMovement = movement;
+            Destroy(gameObject, 0.5f);
+          }
         }
 
         // Update is called once per frame
@@ -91,7 +106,7 @@ namespace  PC2D
                 if (hit.collider == null && hit2.collider == null)
                 {
                     _motor.fallFast = true;
-                    
+
                 }
             }
         }
@@ -101,5 +116,5 @@ namespace  PC2D
             yield return new WaitForSeconds(delayForWallJump);
             _motor.Jump();
         }
-    }
+  }
 }
